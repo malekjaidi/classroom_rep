@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Category index{% endblock %}
+{% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+            <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+            <!-- Additional CSS Files -->
+            <link rel="stylesheet" href="{{asset ("assets/css/fontawesome.css")}}">
+            <link rel="stylesheet" href="{{asset ("assets/css/templatemo-grad-school.css")}}">
+            <link rel="stylesheet" href="{{asset ("assets/css/owl.css")}}">
+            <link rel="stylesheet" href="{{asset ("assets/css/lightbox.css")}}">
+            <link rel="stylesheet" href="{{asset ("assets/css/style.css")}}">
+            <link href="https://fonts.googleapis.com/css?family=Open+Sans:300i,400" rel="stylesheet">
+    
+        {% endblock %}
+{% block body %}
+    {#<h1>Category index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for category in categories %}
+            <tr>
+                <td>{{ category.id }}</td>
+                <td>{{ category.title }}</td>
+                <td>{{ category.description }}</td>
+                <td>
+                    <a href="{{ path('category_show', {'id': category.id}) }}">show</a>
+                    <a href="{{ path('category_edit', {'id': category.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>#}
+
+    <div class="container">
+    {% for category in categories %}
+  <div class="card">
+    <h3 class="title"><a href="{{ path('cat_task', {'id': category.id}) }}">{{ category.title }}</a></h3>
+    <div class="bar">
+      <div class="emptybar"></div>
+      <div class="filledbar"></div>
+    </div>
+    
+  </div>
+  {% endfor %}
+  {% if is_granted('ROLE_ADMIN') %}
+  <div class="card">
+    <h3 class="title"><a href="{{ path('category_new') }}">Ajouter une catégorie</a></h3>
+    <div class="bar">
+      <div class="emptybar"></div>
+      <div class="filledbar"></div>
+    </div>
+    
+  </div>
+  {% endif %}
+  
+
+    {#<a href="{{ path('category_new') }}">Create new</a>#}
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rubriques {% endblock %}
+
+              {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+            <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+            <!-- Additional CSS Files -->
+            <link rel="stylesheet" href="{{asset ("assets/css/fontawesome.css")}}">
+            <link rel="stylesheet" href="{{asset ("assets/css/templatemo-grad-school.css")}}">
+            <link rel="stylesheet" href="{{asset ("assets/css/owl.css")}}">
+            <link rel="stylesheet" href="{{asset ("assets/css/lightbox.css")}}">
+            <link rel="stylesheet" href="{{asset ("assets/css/css1.css")}}">
+
+    
+        {% endblock %}
+
+
+{% block body %}
+
+              <ul class="cards">
+              {% for rubrique in rubriques %} 
+              <div class="col-md-6">
+              <li class="cards__item">
+                <div class="card">
+                  <div class="card__image card__image"><img src="https://image.freepik.com/free-vector/combination-circuit-head-shape-artificial-intelligence-moral-electronic-world-illustration_456031-123.jpg"></div>
+                  <div class="card__content">
+                    <div class="card__title">{{ rubrique.title }}</div>
+                    <p class="card__text">{{ rubrique.description }} </p>
+                    <center><a class="btn " href="{{ path('rub_cat', {'id': rubrique.id}) }}">Consulter</a></center> 
+                    <br>
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <center><a class="btn "  href="{{ path('rubrique_edit', {'id': rubrique.id}) }}"}>Modifier</a></center>
+                    {% endif %}
+
+                  </div>
+                  </div>
+                
+              </li></div>
+              {% endfor %}
+               {% if is_granted('ROLE_ADMIN') %}
+               <div class="col-md-6">
+              <li class="cards__item">
+                <div class="card">
+                  <div class="card__image card__image"><img src="https://image.freepik.com/free-vector/combination-circuit-head-shape-artificial-intelligence-moral-electronic-world-illustration_456031-123.jpg" ></div>
+                  <div class="card__content">
+                    <div class="card__title">Ajouter une rubrique</div>
+                    <p class="card__text">  </p>
+                    <center><a class="btn " href="{{ path('rubrique_new') }}">Ajouter</a></center>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              {% endif %}
+            </ul>
+              
+            
+        </div>
+      </div>
+    </div>
+    </div>
+ 
+{% endblock %}

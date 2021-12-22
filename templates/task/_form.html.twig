@@ -1,0 +1,6 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <br>
+    <center> <button type="submit" class="btn btn-outline-success">{{ button_label|default('Save') }}</button>
+    <a type="button" class="btn btn-outline-secondary" href="{{ path('task_index') }}">back to list</a></center>
+{{ form_end(form) }}

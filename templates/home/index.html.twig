@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+
+<section class="section main-banner" id="top" data-section="section1">
+      <video autoplay muted loop id="bg-video">
+          <source src="assets/images/course-video.mp4" type="video/mp4" />
+      </video>
+
+      <div class="video-overlay header-text">
+          <div class="caption">
+              <h6>Votre Ecole est maintenant en ligne</h6>
+              <h2><em>Votre</em> Classe</h2>
+              <div class="main-button">
+              {% if app.user %}
+                    <div class="scroll-to-section"><a href="/rubrique">Commencer</a></div>
+            {% else  %}
+                    <div class="scroll-to-section"><a href="/rubrique">Commencer</a></div>                 
+            {% endif %}
+              </div>
+          </div>
+      </div>
+  </section>
+  
+        
+ 
+  </section>
+{% endblock %}

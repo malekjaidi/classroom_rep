@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Task{% endblock %}
+
+{% block body %}
+    <h1>Task</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ task.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ task.title }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ task.Description }}</td>
+            </tr>
+            <tr>
+                <th>note</th>
+                <td>{{ task.note }}
+                {% if is_granted('ROLE_TEACHER') %}
+                <a type="button"  href="{{ path('task_note', {'id': task.id}) }}">Attribuer / Modifier la note</a>
+                {% endif %}</td>
+            </tr>
+            <tr>
+                <th>file</th>
+                <td><a href="{{ asset('uploads/') ~ filename }}" download>download</a></td>
+
+            </tr>
+        </tbody>
+    </table>
+
+    <a type="button" class="btn btn-outline-primary" href="{{ path('task_index') }}">back to list</a>
+{% if is_granted('ROLESTUDENT') %}
+
+    <a type="button" class="btn btn-outline-primary" href="{{ path('task_edit', {'id': task.id}) }}">edit</a>
+    {{ include('task/_delete_form.html.twig') }}
+{% endif %}
+{% endblock %}

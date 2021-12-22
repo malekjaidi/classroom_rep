@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Task index{% endblock %}
+
+{% block body %}
+    <h1>Travaux Déposés</h1>
+    <br>
+
+   
+
+
+<div class="container">
+    <table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th scope="col">Fichier</th>
+      <th scope="col">Note</th>
+      <th scope="col">actions</th>
+      
+
+    </tr>
+  </thead>
+  <tbody>
+  {% for task in tasks %}
+    <tr>
+      <td scope="row">{{ task.title }}</td>
+      <td>{{ task.description }}</td>
+      <td>{{ task.file }}</td>
+      <td>{{ task.note}} / 20</td>
+      <td> {% if is_granted('ROLE_TEACHER') %}
+                <a type="button" class="btn btn-outline-primary" href="{{ path('task_show', {'id': task.id}) }}">voir</a>
+                <a type="button" class="btn btn-outline-primary" href="{{ path('task_note', {'id': task.id}) }}">Attribuer / Modifier la note</a>
+            {% elseif is_granted('ROLE_STUDENT') %}
+                <a type="button" class="btn btn-outline-primary" href="{{ path('task_show', {'id': task.id}) }}">voir</a>
+                <a type="button" class="btn btn-outline-primary" href="{{ path('task_edit', {'id': task.id}) }}">Modifier</a>
+            {% else %}
+                <a href="{{ path('task_show', {'id': task.id}) }}">Voir</a>
+            {% endif %}
+                
+        </td>
+
+    </tr>
+    {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+    
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+{% if is_granted('ROLE_STUDENT') %}
+   <center> <a type="button" class="btn btn-outline-info" href="{{ path('task_new') }}">Ajouter un travail</a> </center>
+{% endif %}
+{% endblock %}
